@@ -1,57 +1,15 @@
-# Storefront Visibility Assessment Using Google Maps API
-The Storefront Visibility Assessment project evaluates storefront visibility from the street by leveraging the Google Maps Street View Static API. The goal is to provide a data-driven solution for commercial realtors to assess how well a storefront can attract passersby based on its visibility. By capturing street-level images from multiple angles and processing them with AI-based image recognition, the project generates a visibility score for each location. This approach ensures more accurate assessments by considering factors such as obstructions, viewing angles, and seasonal changes.
+The Storefront Visibility Assessment project evaluates storefront visibility from the street using the Google Maps Street View Static API. This solution provides a data-driven approach for commercial realtors to assess how well a storefront can attract passersby. By leveraging AI-based image processing and traffic data, the project generates a comprehensive visibility score that considers multiple factors, including viewing angles, obstructions, and seasonal variations.
 
-Project Workflow:
+The project begins with location identification, where the latitude and longitude of the storefront are collected. Using the Google Maps Street View Static API, images are captured from four primary angles: north (0°), east (90°), south (180°), and west (270°). Each image is analyzed to identify potential obstructions, such as trees, parked cars, and signs, using computer vision techniques powered by YOLOv8 and OpenCV. Additionally, edge detection and contour analysis are performed to determine how much of the storefront is visible compared to the total storefront area. To account for varying perspectives, visibility scores from all angles are averaged, ensuring a balanced evaluation.
 
-Location Identification:
+An optional seasonal adjustment feature further refines the score by comparing historical Street View images, adjusting for conditions like foliage in summer versus bare branches in winter. 
 
-Collect latitude and longitude of the storefront.
-Example Coordinates: 40.748817, -73.985428 (Empire State Building).
-API Request for Street View Images:
+This score, ranging from 0 to 100, provides an intuitive measure of visibility, with higher scores indicating better storefront exposure.
 
-Use the Google Maps Street View Static API to retrieve images from four angles (0°, 90°, 180°, 270°).
-Image Processing and Visibility Scoring:
-=
-(Visible Storefront Area
-Total Storefront Area)×100
-Visibility Score=( 
-Total Storefront Area
-Visible Storefront Area
-​
- )×100
-Final Visibility Assessment:
+The project was implemented using Python, YOLOv8 for object detection, and OpenCV for image processing. Development was carried out in Jupyter Notebook, streamlining the workflow. The Google Maps API facilitated image retrieval, while Pandas and Requests libraries managed data processing and API calls. The system also incorporates traffic volume data to refine the final score, ensuring that storefronts in high-traffic areas are prioritized for visibility evaluation.
 
-For each storefront, images are captured from multiple angles.
-Visibility is analyzed, and a final score between 0 and 100 is assigned, with higher scores indicating better visibility.
-Key Features:
+For example, a typical storefront assessment might show visibility scores like 85% from the north, 70% from the east (partially obstructed by a tree), 90% from the south, and 60% from the west (obstructed by a parked car). The final averaged visibility score in this case would be 76%. Such detailed scoring enables realtors and business owners to make informed decisions about property listings and site selection.
 
-Efficient Data Sampling: Smart sampling across different road types to avoid excessive API usage.
-Robust Image Processing: AI-based visibility detection using YOLOv8 and OpenCV.
-Coordinate Extraction: Accurate retrieval of location data for API calls.
-Error Handling: Proper exception handling for missing or malformed coordinates.
-Automated Workflow: Developed and executed in Jupyter Notebook for streamlined processing.
-Traffic-Aware Scoring: Integrated traffic volume with visibility scores for more accurate results.
-Tech Stack:
+To enhance efficiency, the project features smart data sampling, ensuring that API requests are limited to necessary images. Robust error handling prevents disruptions from malformed coordinates, and rate limiting avoids exceeding API quotas. A hybrid approach combining AI detection with coordinate-based verification further ensures accuracy, even if the exact storefront location is slightly off.
 
-Languages: Python
-APIs: Google Maps API (Street View, Places, Reverse Geocoding)
-Machine Learning: YOLOv8
-Libraries: OpenCV, Pandas, Requests
-Development Environment: Jupyter Notebook
-Results:
-
-Captured street-level images from multiple angles.
-Detected obstructions and analyzed storefront visibility.
-Assigned visibility scores between 0 and 100.
-Combined AI results with traffic data to refine final scores.
-Next Steps:
-
-API Optimization: Implement rate limiting and optimize API calls.
-Address Verification: Use Google Reverse Geocoding to verify storefront addresses.
-Hybrid Detection: Combine AI-based detection with coordinate-based methods for maximum accuracy.
-Scalability: Automate the process for large datasets and multiple storefronts.
-Potential Use Cases:
-
-Real Estate: Enable commercial realtors to evaluate storefront visibility before listing properties.
-Urban Planning: Assist city planners in assessing pedestrian visibility for new developments.
-Retail Analysis: Help retailers choose prime locations with high visibility for new stores.
+Moving forward, potential improvements include optimizing API calls, integrating Google Reverse Geocoding for address verification, and automating the process for large datasets. This project can be scaled to support real estate platforms, urban planning initiatives, and retail site selection, empowering stakeholders with actionable insights into storefront visibility.
