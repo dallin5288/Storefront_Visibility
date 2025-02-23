@@ -1,24 +1,22 @@
 # Storefront Visibility Assessment Using Google Maps API
-Storefront Visibility Assessment Using Google Maps API
-Overview:
-This project evaluates storefront visibility from the street by leveraging the Google Maps Street View Static API. It captures street-level images of storefronts from multiple angles and assesses visibility based on factors like obstructions, angle, and seasonality.
+The Storefront Visibility Assessment project evaluates storefront visibility from the street by leveraging the Google Maps Street View Static API. The goal is to provide a data-driven solution for commercial realtors to assess how well a storefront can attract passersby based on its visibility. By capturing street-level images from multiple angles and processing them with AI-based image recognition, the project generates a visibility score for each location. This approach ensures more accurate assessments by considering factors such as obstructions, viewing angles, and seasonal changes.
 
-Approach:
+Project Workflow:
 
 Location Identification:
 
 Collect latitude and longitude of the storefront.
+Example Coordinates: 40.748817, -73.985428 (Empire State Building).
 API Request for Street View Images:
 
-Request images from four angles (0°, 90°, 180°, 270°) using the Google Maps Street View Static API.
+Use the Google Maps Street View Static API to retrieve images from four angles (0°, 90°, 180°, 270°).
 Image Processing and Visibility Scoring:
 
-Obstruction Detection: Identify objects like trees, cars, and signs using OpenCV or YOLO.
-Storefront Exposure: Calculate visible storefront area using edge detection and contour analysis.
-Angle-Based Scoring: Average visibility scores from all angles.
-Seasonal Adjustment (Optional): Adjust visibility based on historical imagery.
+Obstruction Detection: Utilize OpenCV and YOLOv8 to identify objects like trees, parked cars, poles, and signs that may obstruct visibility.
+Storefront Exposure: Calculate the visible storefront area compared to the total storefront area using edge detection and contour analysis.
+Angle-Based Scoring: Generate visibility scores for each angle and average them to account for varying perspectives.
+Seasonal Adjustment (Optional): If historical Street View images are available, visibility scores are adjusted based on seasonal conditions (e.g., trees with leaves in summer vs. bare branches in winter).
 Visibility Score Formula:
-
 Visibility Score
 =
 (
@@ -32,24 +30,39 @@ Total Storefront Area
 Visible Storefront Area
 ​
  )×100
-Implementation:
+Final Visibility Assessment:
 
-Used Python for API calls, image retrieval, and processing.
-YOLOv8 model analyzed images for obstruction and visibility scoring.
-Final scores combined AI results with dataset features like traffic volume.
+For each storefront, images are captured from multiple angles.
+Visibility is analyzed, and a final score between 0 and 100 is assigned, with higher scores indicating better visibility.
+Key Features:
+
+Efficient Data Sampling: Smart sampling across different road types to avoid excessive API usage.
+Robust Image Processing: AI-based visibility detection using YOLOv8 and OpenCV.
+Coordinate Extraction: Accurate retrieval of location data for API calls.
+Error Handling: Proper exception handling for missing or malformed coordinates.
+Automated Workflow: Developed and executed in Jupyter Notebook for streamlined processing.
+Traffic-Aware Scoring: Integrated traffic volume with visibility scores for more accurate results.
+Tech Stack:
+
+Languages: Python
+APIs: Google Maps API (Street View, Places, Reverse Geocoding)
+Machine Learning: YOLOv8
+Libraries: OpenCV, Pandas, Requests
+Development Environment: Jupyter Notebook
 Results:
 
-Captured images from multiple angles.
-Analyzed visibility and assigned a final visibility score between 0 and 100.
-
-Key Features:
-* Efficient data sampling to avoid API overuse.
-* Robust coordinate extraction and error handling.
-*  AI-based visibility detection with Google Street View images.
-* Integrated traffic volume for final score calculation.
-
+Captured street-level images from multiple angles.
+Detected obstructions and analyzed storefront visibility.
+Assigned visibility scores between 0 and 100.
+Combined AI results with traffic data to refine final scores.
 Next Steps:
 
-Optimize API calls and add rate limiting.
-Implement address verification using Google Reverse Geocoding.
-Enhance detection by combining AI and coordinate-based methods.
+API Optimization: Implement rate limiting and optimize API calls.
+Address Verification: Use Google Reverse Geocoding to verify storefront addresses.
+Hybrid Detection: Combine AI-based detection with coordinate-based methods for maximum accuracy.
+Scalability: Automate the process for large datasets and multiple storefronts.
+Potential Use Cases:
+
+Real Estate: Enable commercial realtors to evaluate storefront visibility before listing properties.
+Urban Planning: Assist city planners in assessing pedestrian visibility for new developments.
+Retail Analysis: Help retailers choose prime locations with high visibility for new stores.
