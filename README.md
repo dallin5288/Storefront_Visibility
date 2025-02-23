@@ -41,12 +41,7 @@ Results:
 
 Captured images from multiple angles.
 Analyzed visibility and assigned a final visibility score between 0 and 100.
-Example Scores:
-North (0°): 85% (No Obstruction)
-East (90°): 70% (Tree Obstruction)
-South (180°): 90% (Clear)
-West (270°): 60% (Car Obstruction)
-Final Score: 76%
+
 Key Features:
 * Efficient data sampling to avoid API overuse.
 * Robust coordinate extraction and error handling.
