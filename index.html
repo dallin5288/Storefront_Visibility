@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storefront Visibility</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: url('https://www.transparenttextures.com/patterns/cute-dinosaurs.png');
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+            position: relative;
+        }
+        .side-panel {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            height: auto;
+            width: 150px;
+            background-color: #ffffff;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .left-panel {
+            left: 10%;
+        }
+        .right-panel {
+            right: 10%;
+        }
+        .side-panel img {
+            max-width: 100%;
+            height: auto;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            width: 600px;
+            max-width: 90%;
+            text-align: center;
+            margin: 0 auto;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            color: #00796b;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        input, button {
+            width: 80%;
+            padding: 10px 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 1em;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+            padding: 10px 16px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 10px;
+            font-size: 1.3em;
+            text-align: center;
+        }
+        #output-box {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(241, 241, 241, 0.7);
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 1.1em;
+            color: rgba(51, 51, 51, 0.6);
+            text-align: center;
+        }
+        #image-preview {
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: rgba(241, 241, 241, 0.7);
+            text-align: center;
+            height: 300px;
+        }
+        #image-preview img {
+            max-width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="side-panel left-panel">
+        <img src="R.jpg" alt="Left Image">
+    </div>
+    <div class="side-panel right-panel">
+        <img src="R.jpg" alt="Right Image">
+    </div>
+    <div class="container">
+        <h1>Storefront Visibility</h1>
+        <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" placeholder="Enter longitude">
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" placeholder="Enter latitude">
+        </div>
+        <div class="form-group">
+            <label for="storefront-image">Upload Storefront Image:</label>
+            <input type="file" id="storefront-image" accept="image/*" onchange="previewImage(event)">
+        </div>
+        <div id="image-preview">Storefront image will appear here.</div>
+        <button onclick="calculateVisibilityScore()">Calculate Visibility Score</button>
+        <div id="output-box">Visibility Score will appear here.</div>
+    </div>
+
+    <script>
+        function calculateVisibilityScore() {
+            const longitude = parseFloat(document.getElementById('longitude').value);
+            const latitude = parseFloat(document.getElementById('latitude').value);
+
+            if (isNaN(longitude) || isNaN(latitude)) {
+                alert("Please enter valid numerical values for longitude and latitude.");
+                return;
+            }
+
+            let score = 100 - (Math.abs(longitude) + Math.abs(latitude)) % 100;
+
+            document.getElementById('output-box').innerText = `Visibility Score: ${score.toFixed(2)}`;
+        }
+
+        function previewImage(event) {
+            const preview = document.getElementById('image-preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Storefront Image">`;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = "Storefront image will appear here.";
+            }
+        }
+    </script>
+</body>
+</html>
