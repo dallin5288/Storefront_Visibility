@@ -11,20 +11,9 @@ API Request for Street View Images:
 
 Use the Google Maps Street View Static API to retrieve images from four angles (0°, 90°, 180°, 270°).
 Image Processing and Visibility Scoring:
-
-Obstruction Detection: Utilize OpenCV and YOLOv8 to identify objects like trees, parked cars, poles, and signs that may obstruct visibility.
-Storefront Exposure: Calculate the visible storefront area compared to the total storefront area using edge detection and contour analysis.
-Angle-Based Scoring: Generate visibility scores for each angle and average them to account for varying perspectives.
-Seasonal Adjustment (Optional): If historical Street View images are available, visibility scores are adjusted based on seasonal conditions (e.g., trees with leaves in summer vs. bare branches in winter).
-Visibility Score Formula:
-Visibility Score
 =
-(
-Visible Storefront Area
-Total Storefront Area
-)
-×
-100
+(Visible Storefront Area
+Total Storefront Area)×100
 Visibility Score=( 
 Total Storefront Area
 Visible Storefront Area
